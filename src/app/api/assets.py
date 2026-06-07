@@ -1,4 +1,9 @@
-from fastapi import APIRouter
+from fastapi import APIRouter, Depends
+from sqlalchemy.orm import Session
+
+from src.app.database.db import get_db
+from src.app.models.asset import Asset
+from src.app.schemas.asset import AssetCreate, AssetResponse
 
 router = APIRouter(
     prefix="/assets",
@@ -6,9 +11,17 @@ router = APIRouter(
 )
 
 
-@router.get("/")
-def list_assets():
-    return {
-        "message": "Asset list endpoint",
-        "data": [],
-    }
+@router.post("/", response_model=AssetResponse)
+def create_asset(asset: AssetCreate, db: Session = Depends(get_db)):
+    new_asset = Asset(**asset.model_dump())
+
+    db.add(new_asset)
+    db.commit()
+    db.refresh(new_asset)
+
+    return new_asset
+
+
+@router.get("/", response_model=list[AssetResponse])
+def list_assets(db: Session = Depends(get_db)):
+    return db.query(Asset).all()
