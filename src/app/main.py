@@ -1,5 +1,10 @@
 from fastapi import FastAPI
 
+from src.app.database.db import Base, engine
+from src.app.models.asset import Asset
+
+Base.metadata.create_all(bind=engine)
+
 app = FastAPI(
     title="IT-IMRT API",
     description="API for IT infrastructure monitoring and asset reporting.",

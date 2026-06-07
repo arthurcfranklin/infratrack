@@ -41,10 +41,11 @@ Campos previstos:
 
 ## Fluxo inicial
 
+```text
 Host / Ativo
-↓
+   ↓
 Cadastro no sistema
-↓
+   ↓
 Banco SQLite
-↓
+   ↓
 Consulta via interface web
