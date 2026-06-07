@@ -44,6 +44,31 @@ def get_asset(asset_id: int, db: Session = Depends(get_db)):
 
     return asset
 
+@router.put("/{asset_id}", response_model=AssetResponse)
+def update_asset(
+    asset_id: int,
+    updated_asset: AssetCreate,
+    db: Session = Depends(get_db),
+):
+    asset = db.query(Asset).filter(Asset.id == asset_id).first()
+
+    if asset is None:
+        raise HTTPException(status_code=404, detail="Asset not found")
+
+    for field, value in updated_asset.model_dump().items():
+        setattr(asset, field, value)
+
+    try:
+        db.commit()
+        db.refresh(asset)
+    except IntegrityError:
+        db.rollback()
+        raise HTTPException(
+            status_code=400,
+            detail="IP address already registered",
+        )
+
+    return asset
 
 @router.delete("/{asset_id}")
 def delete_asset(asset_id: int, db: Session = Depends(get_db)):
