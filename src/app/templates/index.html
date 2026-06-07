@@ -285,6 +285,49 @@
 
                     <tbody>
                         {% for asset in assets %}
+                        <div class="modal fade" id="deleteAssetModal{{ asset.id }}" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content text-center p-4">
+
+            <div class="modal-alert-icon modal-alert-error">
+                !
+            </div>
+
+            <h4 class="mb-3">Confirmar exclusão?</h4>
+
+            <p class="subtitle mb-4">
+                Deseja realmente excluir o ativo
+                <strong>{{ asset.hostname }}</strong>
+                do sistema?
+            </p>
+
+            <div class="d-flex justify-content-center gap-2">
+
+                <button
+                    type="button"
+                    class="btn btn-secondary"
+                    data-bs-dismiss="modal"
+                >
+                    Cancelar
+                </button>
+
+                <form
+                    method="post"
+                    action="/dashboard/assets/delete/{{ asset.id }}"
+                >
+                    <button
+                        type="submit"
+                        class="btn btn-danger"
+                    >
+                        Excluir definitivamente
+                    </button>
+                </form>
+
+            </div>
+
+        </div>
+    </div>
+</div>
                         <tr>
                             <td>{{ asset.id }}</td>
                             <td>{{ asset.hostname }}</td>
@@ -306,13 +349,13 @@
                                     data-bs-target="#editAssetModal{{ asset.id }}">
                                     Editar
                                 </button>
-
-                                <form method="post" action="/dashboard/assets/delete/{{ asset.id }}" class="d-inline"
-                                    onsubmit="return confirm('Deseja realmente excluir este ativo?');">
-                                    <button type="submit" class="btn btn-sm btn-danger btn-action">
-                                        Excluir
-                                    </button>
-                                </form>
+                                <button type="button" 
+                                class="btn btn-sm btn-danger btn-action" 
+                                data-bs-toggle="modal"
+                                data-bs-target="#deleteAssetModal{{ asset.id }}"
+                            >
+                                    Excluir
+                            </button>
                             </td>
                         </tr>
 
