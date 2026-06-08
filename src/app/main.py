@@ -136,7 +136,7 @@ def update_asset_web(
 
     if asset is None:
         db.close()
-        raise HTTPException(status_code=404, detail="Asset not found")
+        raise HTTPException(status_code=404, detail="Ativo não encontrado")
 
     asset.hostname = hostname
     asset.ip_address = ip_address
@@ -162,6 +162,56 @@ def update_asset_web(
         status_code=303,
     )
 
+
+@app.post("/dashboard/assets/start/{asset_id}")
+def start_asset_web(asset_id: int):
+    db = SessionLocal()
+    asset = db.query(Asset).filter(Asset.id == asset_id).first()
+
+    if asset:
+        asset.status = "Online"
+        db.commit()
+
+    db.close()
+
+    return RedirectResponse(
+        url="/dashboard?success=Ativo iniciado com sucesso.",
+        status_code=303,
+    )
+
+
+@app.post("/dashboard/assets/stop/{asset_id}")
+def stop_asset_web(asset_id: int):
+    db = SessionLocal()
+    asset = db.query(Asset).filter(Asset.id == asset_id).first()
+
+    if asset:
+        asset.status = "Offline"
+        db.commit()
+
+    db.close()
+
+    return RedirectResponse(
+        url="/dashboard?success=Ativo parado com sucesso.",
+        status_code=303,
+    )
+
+
+@app.post("/dashboard/assets/restart/{asset_id}")
+def restart_asset_web(asset_id: int):
+    db = SessionLocal()
+    asset = db.query(Asset).filter(Asset.id == asset_id).first()
+
+    if asset:
+        asset.status = "Online"
+        db.commit()
+
+    db.close()
+
+    return RedirectResponse(
+        url="/dashboard?success=Ativo reiniciado com sucesso.",
+        status_code=303,
+    )
 
 @app.post("/dashboard/assets/delete/{asset_id}")
 def delete_asset_web(asset_id: int):
