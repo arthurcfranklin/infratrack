@@ -1,4 +1,4 @@
-# IT Infrastructure Monitoring & Asset Reporting Tool
+# IfraTrack - Monitoramento
 
 ![Python](https://img.shields.io/badge/Python-3.12+-blue?logo=python)
 ![Status](https://img.shields.io/badge/Status-Em%20Desenvolvimento-orange)
@@ -10,7 +10,7 @@
 
 ## 📖 Sobre o Projeto
 
-O IT Infrastructure Monitoring & Asset Reporting Tool (IT-IMRT) é um projeto voltado à automação de inventário e monitoramento de infraestrutura de TI.
+O InfraTrack é um projeto voltado à automação de inventário e monitoramento de infraestrutura de TI.
 
 A proposta é centralizar informações de ativos, acompanhar a disponibilidade de dispositivos e gerar relatórios operacionais por meio de uma interface web, simulando cenários encontrados em ambientes corporativos.
 
