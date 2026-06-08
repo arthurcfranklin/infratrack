@@ -60,18 +60,18 @@ SQLite
 ### Fase 1 - Planejamento e Estruturação
 - [x] Criação do repositório
 - [x] Configuração inicial do projeto
-- [ ] Definição da arquitetura
-- [ ] Estruturação das pastas
+- [x] Definição da arquitetura
+- [x] Estruturação das pastas
 
 ### Fase 2 - Inventário de Ativos
-- [ ] Modelagem do banco de dados
-- [ ] Cadastro de ativos
+- [x] Modelagem do banco de dados
+- [x] Cadastro de ativos
 - [ ] Coleta de informações do sistema
 
 ### Fase 3 - Dashboard Web
-- [ ] Interface web
-- [ ] Visualização de ativos
-- [ ] Consulta de informações
+- [x] Interface web
+- [x] Visualização de ativos
+- [x] Consulta de informações
 
 ### Fase 4 - Monitoramento
 - [ ] Monitoramento ICMP
